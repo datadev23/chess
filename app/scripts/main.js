@@ -1,2 +1,14 @@
 //The app that will control the how Ai should act and how to differentiate in movements
-console.log('App that will be shown to the application');
+(function(global){
+  'use strict';
+  let app = {};
+  const engine = global.engine,
+    resources = global.resources,
+    moves = global.moves;
+
+  engine.test();
+  resources.test();
+  moves.test();
+
+
+})(window);
