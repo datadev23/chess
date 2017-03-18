@@ -1,9 +1,10 @@
-//Event trigger handlers
-(function(global){
-  let engine = {};
-  engine.test=function(){
+// Event trigger handlers
+(function Engine() {
+  const engine = {};
+
+  engine.test = function testAnon() {
     console.log('engine executed');
     return 'engine';
   };
-  global.engine=engine;
-})(window);
+  this.engine = engine;
+}(this));

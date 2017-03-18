@@ -1,14 +1,14 @@
-//The app that will control the how Ai should act and how to differentiate in movements
-(function(global){
-  'use strict';
+// The app that will control the how Ai should act and how to differentiate in movements
+(function main(global) {
   let app = {};
-  const engine = global.engine,
-    resources = global.resources,
-    moves = global.moves;
+  const engine = global.engine;
+  const resources = global.resources;
+  const moves = global.moves;
 
   engine.test();
   resources.test();
   moves.test();
 
-
-})(window);
+  app.engine = engine;
+  app = {};
+}(this));

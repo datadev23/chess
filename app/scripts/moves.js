@@ -1,9 +1,10 @@
-//specific moves for all the items
-(function(global){
-  let moves = {};
-  moves.test=function(){
+// specific moves for all the items
+
+(function Moves() {
+  const moves = {};
+  moves.test = function testAnon() {
     console.log('moves executed');
     return 'moves';
   };
-  global.moves=moves;
-})(window);
+  global.moves = moves;
+}(this));
