@@ -1,12 +1,11 @@
 // all resources for the application
 /* global window*/
-(function Resources() {
-  const resources = {};
-  resources.test = function testAnon() {
-    console.log('resources executed');
-    return 'resources';
-  };
-  const arr = ['test', 'test'];
-  arr.forEach(x => console.log(x));
-  window.resources = resources;
-}(this));
+const loadResources = () => '0 resources';
+class Resources {
+  load() {
+    this.check = '';
+    return `${loadResources()} loaded`;
+  }
+}
+
+window.resources = Resources;
