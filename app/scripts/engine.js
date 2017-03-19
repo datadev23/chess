@@ -1,10 +1,15 @@
-// Event trigger handlers
-(function Engine() {
-  const engine = {};
+/* global window*/
+const test = () => 'Engine works';
 
-  engine.test = function testAnon() {
-    console.log('engine executed');
-    return 'engine';
-  };
-  this.engine = engine;
-}(this));
+class Engine {
+  constructor(engineVal = 'test') {
+    this.engine = engineVal;
+    this.test = test;
+  }
+
+  check() {
+    return `${this.engine} works`;
+  }
+}
+
+window.engine = Engine;

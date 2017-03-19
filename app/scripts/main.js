@@ -1,14 +1,8 @@
-// The app that will control the how Ai should act and how to differentiate in movements
-(function main(global) {
-  let app = {};
-  const engine = global.engine;
-  const resources = global.resources;
-  const moves = global.moves;
+/* global window*/
+const Engine = window.engine;
 
-  engine.test();
-  resources.test();
-  moves.test();
+const test = () => {
+  console.log(new Engine('Passed').check());
+};
 
-  app.engine = engine;
-  app = {};
-}(this));
+test();

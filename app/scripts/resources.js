@@ -1,4 +1,5 @@
 // all resources for the application
+/* global window*/
 (function Resources() {
   const resources = {};
   resources.test = function testAnon() {
@@ -7,5 +8,5 @@
   };
   const arr = ['test', 'test'];
   arr.forEach(x => console.log(x));
-  global.resources = resources;
+  window.resources = resources;
 }(this));
