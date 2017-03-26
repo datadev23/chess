@@ -1,11 +1,14 @@
-(function () {
-  'use strict';
+/* global window,describe,it,expect*/
+/* eslint no-unused-expressions: "warn"*/
+(function TestSuite() {
+  describe('Engine Test Module ', () => {
+    describe('Engine Class', () => {
+      const Engine = window.engine;
 
-  describe('Give it some context', function () {
-    describe('maybe a bit more context here', function () {
-      it('should run here few assertions', function () {
-        expect(true).toBe(true);
+      it('should be truthy', () => {
+        const engine = new Engine();
+        expect(engine).not.toBeUndefined();
       });
     });
   });
-})();
+}());
