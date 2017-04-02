@@ -14,8 +14,8 @@ describe('Engine variable defined', function() {
 
 	it('check method returns ', function() {
 
-		spyOn(engine, 'check');
-		expect(engine.check).toHaveBeenCalled();
+		spyOn(Engine, 'check');
+		expect(Engine.check).toHaveBeenCalled();
 
 
 		});
@@ -24,8 +24,8 @@ describe('Engine variable defined', function() {
 
 		//expect(false).toBeDefined();
 
-        spyOn(engine, 'load');
-		expect(engine.load).toHaveBeenCalled();
+        spyOn(Engine, 'load');
+		expect(Engine.load).toHaveBeenCalled();
 
 		});
 
