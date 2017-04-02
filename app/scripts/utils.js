@@ -1,5 +1,6 @@
-/* global window*/
-/* eslint no-console: ["error", { allow: ["warn", "log"] }] */
+/* global window,alert*/
+/* eslint no-console:0 */
+/* eslint no-alert: 0 */
 
 /* An utility library for placing all the commonly used functions */
 class Utils {
@@ -8,6 +9,9 @@ class Utils {
   }
   static warn(val) {
     console.warn(val);
+  }
+  static alert(val) {
+    alert(val);
   }
 }
 window.utils = Utils;
