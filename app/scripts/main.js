@@ -20,7 +20,7 @@ const init = () => {
   const engine = new Engine('Main Engine');
   const moves = new Moves('pawn');
   const resources = new Resources();
-
+  engine.load();
   print(engine.check());
   print(moves.currentMove);
   print(resources.load());
