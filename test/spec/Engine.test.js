@@ -1,39 +1,25 @@
-/* global window,describe,it,expect*/
-/* eslint no-unused-expressions: "warn"*/
+/* global window,describe,it,expect,spyOn*/
 (function TestSuite() {
-	 
+  describe('Engine variable defined', () => {
+    const Engine = window.engine;
 
-describe('Engine variable defined', function() {
+    it('is the object defined', () => {
+      // console.log(Engine.check());
+      const engine = new Engine();
+      expect(engine).toBeDefined();
+    });
 
-	it('is the object defined', function() {
-		 const Engine = window.engine;
-		 //console.log(Engine.check());
-		 expect(false).toBeDefined();
+    it('check method returns ', () => {
+      const engine = new Engine();
+      spyOn(engine, 'check');
+      expect(engine.check).toHaveBeenCalled();
+    });
 
-	});
-
-	it('check method returns ', function() {
-
-		spyOn(Engine, 'check');
-		expect(Engine.check).toHaveBeenCalled();
-
-
-		});
-
-		it('load method called ', function() {
-
-		//expect(false).toBeDefined();
-
-        spyOn(Engine, 'load');
-		expect(Engine.load).toHaveBeenCalled();
-
-		});
-
-
-
-
-
-
-});
-
+    it('load method called ', () => {
+      // expect(false).toBeDefined();
+      const engine = new Engine();
+      spyOn(engine, 'load');
+      expect(engine.load).toHaveBeenCalled();
+    });
+  });
 }());
