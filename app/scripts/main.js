@@ -1,6 +1,5 @@
 /* global window*/
 const Engine = window.engine;
-const Resources = window.resources;
 const Moves = window.moves;
 const Utils = window.utils;
 // Need to have an extensive list of every item on the board. CAn be a static list from another file
@@ -19,11 +18,10 @@ const print = (val) => {
 const init = () => {
   const engine = new Engine('Main Engine');
   const moves = new Moves('pawn');
-  const resources = new Resources();
+
   engine.load();
   print(engine.check());
   print(moves.currentMove);
-  print(resources.load());
 };
 
 class Main {

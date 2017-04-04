@@ -4,33 +4,60 @@ const Utils = window.utils;
 const print = (val) => {
   Utils.log(val);
 };
+const Resources = window.Resources;
+const resources = new Resources();
 const columns = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+const numCols = 8;
+const numRows = 8;
 const rows = [1, 2, 3, 4, 5, 6, 7, 8];
-let currentTile = {};
-currentTile = { chess: 'val' };
+const doc = document;
+const win = window;
+const canvas = doc.createElement('canvas');
 
+const ctx = canvas.getContext('2d');
+// let currentTile = {};
+// currentTile = { chess: 'val' };
+const renderBoard = () => {
+  const blackTile = 'images/blackSquare.png';
+  const whiteTile = 'images/whiteSquare.png';
+  resources.load(blackTile);
+  resources.load(whiteTile);
+
+  let row;
+  let col;
+
+  for (row = 1; row <= numRows; row = +1) {
+    for (col = 1; col <= numCols; col = +1) {
+      if (row % 2 === 0) {
+        if (col % 2 === 0) {
+          ctx.drawImage(resources.get(blackTile), col * 101, row * 83);
+        } else {
+          ctx.drawImage(resources.get(whiteTile), col * 101, row * 83);
+        }
+      } else if (col % 2 === 0) {
+        ctx.drawImage(resources.get(whiteTile), col * 101, row * 83);
+      } else {
+        ctx.drawImage(resources.get(blackTile), col * 101, row * 83);
+      }
+    }
+  }
+};
 class Engine {
   constructor(engineVal = 'test') {
     this.engine = engineVal;
   }
   load() {
-    const doc = document;
-    const win = window;
-    const canvas = doc.createElement('canvas');
     if (!canvas) {
       Utils.alert('Canvas is not supported');
       return;
     }
-    const ctx = canvas.getContext('2d');
     let lastTime;
     print(ctx, lastTime, win, columns, rows);
     canvas.width = 600;
     canvas.height = 606;
     doc.getElementById('chessBoard').appendChild(canvas);
+    renderBoard();
     this.loaded = true;
-    // createBoard();
-    this.currentTile = currentTile;
-    // ctx.drawImage(Resources.get(rowImages[row]), col * 101, row * 83);
   }
   check() {
     return `${this.engine} works`;
