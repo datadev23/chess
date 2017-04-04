@@ -6,23 +6,21 @@ const print = (val) => {
 };
 const Resources = window.Resources;
 const resources = new Resources();
-const columns = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+// const columns = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
 const numCols = 8;
 const numRows = 8;
-const rows = [1, 2, 3, 4, 5, 6, 7, 8];
+// const rows = [1, 2, 3, 4, 5, 6, 7, 8];
 const doc = document;
-const win = window;
+// const win = window;
 const canvas = doc.createElement('canvas');
-
+const blackTile = 'images/blackSquare.png';
+const whiteTile = 'images/whiteSquare.png';
+resources.load(blackTile);
+resources.load(whiteTile);
 const ctx = canvas.getContext('2d');
 // let currentTile = {};
 // currentTile = { chess: 'val' };
 const renderBoard = () => {
-  const blackTile = 'images/blackSquare.png';
-  const whiteTile = 'images/whiteSquare.png';
-  resources.load(blackTile);
-  resources.load(whiteTile);
-
   let row;
   let col;
 
@@ -47,12 +45,12 @@ class Engine {
     this.engine = engineVal;
   }
   load() {
+    print('Engine load function called');
     if (!canvas) {
       Utils.alert('Canvas is not supported');
       return;
     }
-    let lastTime;
-    print(ctx, lastTime, win, columns, rows);
+
     canvas.width = 600;
     canvas.height = 606;
     doc.getElementById('chessBoard').appendChild(canvas);

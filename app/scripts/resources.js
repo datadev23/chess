@@ -1,47 +1,38 @@
 // all resources for the application
 /* global window,Image*/
 // const loadResources = () => '0 resources';
-class Resources {
-  cosntructor() {
-    this.init();
-  }
-  init() {
-    this.resourceCache = {};
-    this.loading = [];
-    this.readyCallbacks = [];
-  }
-  load(url) {
-    if (this.resourceCache && {}.prototype.hasOwnProperty.call(this.resourceCache, url)) {
-      return this.resourceCache[url];
+const resourceCache = {};
+const readyCallbacks = [];
+const isReady = () => {
+  let ready = true;
+  Object.keys(resourceCache).forEach = (k) => {
+    if ({}.prototype.hasOwnProperty.call(resourceCache, k) && !resourceCache[k]) {
+      ready = false;
     }
+  };
+  return ready;
+};
+class Resources {
+  load(url) {
+    this.loaded = false;
     const img = new Image();
-    img.onload = function imageLoader() {
-      this.resourceCache[url] = img;
-
-      if (this.isReady()) {
-        this.readyCallbacks.forEach((func) => {
+    img.onload = () => {
+      resourceCache[url] = img;
+      if (isReady()) {
+        readyCallbacks.forEach((func) => {
           func();
         });
       }
     };
 
-    // this.resourceCache[url] = false;
     img.src = url;
+    // resourceCache[url] = img;
     return '';
   }
 
   get(url) {
-    return this.resourceCache[url];
-  }
-
-  isReady() {
-    let ready = true;
-    Object.keys(this.resourceCache).forEach = (k) => {
-      if ({}.prototype.hasOwnProperty.call(this.resourceCache, k) && !this.resourceCache[k]) {
-        ready = false;
-      }
-    };
-    return ready;
+    this.loaded = false;
+    return resourceCache[url];
   }
 
   onReady(func) {
