@@ -13,32 +13,9 @@ const numRows = 8;
 
 // let currentTile = {};
 // currentTile = { chess: 'val' };
-const renderBoard = (ctx, blackTile, whiteTile) => {
-  let row;
-  let col;
-
-  // ctx.drawImage(resources.get(blackTile), 0 * 60, 0 * 60);
-  // ctx.drawImage(resources.get(whiteTile), 1 * 60, 1 * 60);
-
-  for (row = 0; row < numRows; row = +1) {
-    for (col = 0; col < numCols; col = +1) {
-      // if (row % 2 === 0) {
-      //   if (col % 2 === 0) {
-      //     ctx.drawImage(resources.get(blackTile), col * 60, row * 60);
-      //   } else {
-      //     ctx.drawImage(resources.get(whiteTile), col * 60, row * 60);
-      //   }
-      // } else {
-      //   if (col % 2 === 0) {
-      //     ctx.drawImage(resources.get(whiteTile), col * 60, row * 60);
-      //   } else {
-      //     ctx.drawImage(resources.get(blackTile), col * 60, row * 60);
-      //   }
-      // }
-      print(`Column No is ${col} and Row is ${row}`);
-    }
-  }
-};
+let ctx = {};
+let blackTile = '';
+let whiteTile = '';
 class Engine {
   constructor(engineVal = 'test') {
     this.engine = engineVal;
@@ -53,17 +30,42 @@ class Engine {
       Utils.alert('Canvas is not supported');
       return;
     }
-    const blackTile = 'images/blackTile.jpg';
-    const whiteTile = 'images/whiteTile.png';
-    const ctx = canvas.getContext('2d');
-    // resources.load(blackTile);
-    // resources.load(whiteTile);
-    canvas.width = 1000;
+    blackTile = 'images/blackTile.jpg';
+    whiteTile = 'images/whiteTile.png';
+    ctx = canvas.getContext('2d');
+    resources.load(blackTile);
+    resources.load(whiteTile);
+    resources.onReady(this.renderBoard);
+    canvas.width = 600;
     canvas.height = 600;
     doc.getElementById('chessBoard').appendChild(canvas);
 
     this.loaded = true;
-    renderBoard(ctx, blackTile, whiteTile);
+  }
+  renderBoard() {
+    let row;
+    let col;
+
+    // ctx.drawImage(resources.get(blackTile), 0 * 60, 0 * 60);
+    // ctx.drawImage(resources.get(whiteTile), 1 * 60, 1 * 60);
+
+    for (row = 0; row < numRows; row += 1) {
+      for (col = 0; col < numCols; col += 1) {
+        if (row % 2 === 0) {
+          if (col % 2 === 0) {
+            ctx.drawImage(resources.get(blackTile), col * 60, row * 60);
+          } else {
+            ctx.drawImage(resources.get(whiteTile), col * 60, row * 60);
+          }
+        } else if (row % 2 !== 0) {
+          if (col % 2 === 0) {
+            ctx.drawImage(resources.get(whiteTile), col * 60, row * 60);
+          } else {
+            ctx.drawImage(resources.get(blackTile), col * 60, row * 60);
+          }
+        }
+      }
+    }
   }
   check() {
     return `${this.engine} works`;

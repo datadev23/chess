@@ -21,10 +21,11 @@ class Resources {
   constructor() {
     resourceCache = {};
     this.resourceCache = {};
+    this.readyCallbacks = [];
   }
   load(url) {
     print('Enterd Resource loaders');
-    debugger;
+
     if (resourceCache[url]) {
       return resourceCache[url];
     }
@@ -33,6 +34,7 @@ class Resources {
     img.onload = function Loading() {
       resourceCache[url] = img;
       this.loaded = true;
+      print('Image loaded');
       if (isReady()) {
         readyCallbacks.forEach((func) => {
           func();
@@ -47,14 +49,15 @@ class Resources {
 
   get(url) {
     this.loaded = false;
-    print('Enterd Resources get url');
+
     if (resourceCache[url]) return resourceCache[url];
+    print('Enterd Resources get url');
     this.load(url);
     return resourceCache[url];
   }
 
   onReady(func) {
-    this.readyCallbacks.push(func);
+    readyCallbacks.push(func);
   }
 }
 
