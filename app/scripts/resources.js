@@ -47,13 +47,13 @@ class Resources {
     return '';
   }
 
-  get(url) {
+  get(url, rowId, colId) {
     this.loaded = false;
-
-    if (resourceCache[url]) return resourceCache[url];
-    print('Enterd Resources get url');
-    this.load(url);
-    return resourceCache[url];
+    let img = new Image();
+    img = resourceCache[url];
+    img.id = `${rowId + colId}`;
+    print(img);
+    return img;
   }
 
   onReady(func) {

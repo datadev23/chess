@@ -6,10 +6,10 @@ const print = (val) => {
 };
 const Resources = window.Resources;
 const resources = new Resources();
-// const columns = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+const columns = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
 const numCols = 8;
 const numRows = 8;
-// const rows = [1, 2, 3, 4, 5, 6, 7, 8];
+const rows = [1, 2, 3, 4, 5, 6, 7, 8];
 
 // let currentTile = {};
 // currentTile = { chess: 'val' };
@@ -19,6 +19,7 @@ let whiteTile = '';
 class Engine {
   constructor(engineVal = 'test') {
     this.engine = engineVal;
+    this.loaded = {};
   }
   load() {
     print('Engine load function called');
@@ -45,7 +46,6 @@ class Engine {
   renderBoard() {
     let row;
     let col;
-
     // ctx.drawImage(resources.get(blackTile), 0 * 60, 0 * 60);
     // ctx.drawImage(resources.get(whiteTile), 1 * 60, 1 * 60);
 
@@ -53,15 +53,15 @@ class Engine {
       for (col = 0; col < numCols; col += 1) {
         if (row % 2 === 0) {
           if (col % 2 === 0) {
-            ctx.drawImage(resources.get(blackTile), col * 60, row * 60);
+            ctx.drawImage(resources.get(blackTile, rows[row], columns[col]), col * 60, row * 60);
           } else {
-            ctx.drawImage(resources.get(whiteTile), col * 60, row * 60);
+            ctx.drawImage(resources.get(whiteTile, rows[row], columns[col]), col * 60, row * 60);
           }
         } else if (row % 2 !== 0) {
           if (col % 2 === 0) {
-            ctx.drawImage(resources.get(whiteTile), col * 60, row * 60);
+            ctx.drawImage(resources.get(whiteTile, rows[row], columns[col]), col * 60, row * 60);
           } else {
-            ctx.drawImage(resources.get(blackTile), col * 60, row * 60);
+            ctx.drawImage(resources.get(blackTile, rows[row], columns[col]), col * 60, row * 60);
           }
         }
       }
