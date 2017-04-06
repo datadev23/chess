@@ -16,7 +16,6 @@ const rows = [1, 2, 3, 4, 5, 6, 7, 8];
 // currentTile = { chess: 'val' };
 let ctx = {};
 // let blackTile = '';
-let whiteTile = '';
 class Engine {
   constructor() {
     this.blackTile = '';
@@ -32,10 +31,25 @@ class Engine {
       return;
     }
     this.blackTile = 'images/blackTile.jpg';
-    whiteTile = 'images/whiteTile.png';
+    this.whiteTile = 'images/whiteTile.png';
+    this.pawnImageB = {
+      src: 'images/pieces.png',
+      width: '31',
+      height: '66',
+      x: '-31',
+      y: '-19',
+    };
+    this.pawnImageW = {
+      src: 'images/pieces.png',
+      width: '',
+      height: '',
+      x: '-30',
+      y: '-120',
+    };
     ctx = canvas.getContext('2d');
     resources.load(this.blackTile);
-    resources.load(whiteTile);
+    resources.load(this.whiteTile);
+    // resources.loadPieces([this.pawnImageB, this.pawnImageW]);
     resources.onReady(this.renderBoard, this);
     canvas.width = 600;
     canvas.height = 600;
@@ -58,11 +72,19 @@ class Engine {
               row * 60,
             );
           } else {
-            ctx.drawImage(resources.get(whiteTile, rows[row], columns[col]), col * 60, row * 60);
+            ctx.drawImage(
+              resources.get(self.whiteTile, rows[row], columns[col]),
+              col * 60,
+              row * 60,
+            );
           }
         } else if (row % 2 !== 0) {
           if (col % 2 === 0) {
-            ctx.drawImage(resources.get(whiteTile, rows[row], columns[col]), col * 60, row * 60);
+            ctx.drawImage(
+              resources.get(self.whiteTile, rows[row], columns[col]),
+              col * 60,
+              row * 60,
+            );
           } else {
             ctx.drawImage(
               resources.get(self.blackTile, rows[row], columns[col]),
@@ -74,6 +96,10 @@ class Engine {
       }
     }
   }
+  // generateItems() {
+  //   const self = this;
+  //   self.pawnImage;
+  // }
 }
 
 window.engine = Engine;

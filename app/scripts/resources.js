@@ -45,7 +45,14 @@ class Resources {
     me.resourceCache[url] = false;
     return '';
   }
-
+  loadPieces(imagesArr) {
+    const generateImagesArr = imagesArr;
+    const me = this;
+    generateImagesArr.forEach((obj) => {
+      // obj.src;
+      me.load(obj);
+    });
+  }
   get(url) {
     print(this.resourceCache[url]);
     return this.resourceCache[url];
