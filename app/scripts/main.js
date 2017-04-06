@@ -20,13 +20,14 @@ const init = () => {
   // const moves = new Moves('pawn');
 
   engine.load();
-  print(engine.check());
+
   // print(moves.currentMove);
 };
 
 class Main {
   constructor() {
     this.init = init();
+    print('Main function has initiated');
   }
   start(item = 'NA') {
     this.selectedSide = 'white';

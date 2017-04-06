@@ -1,12 +1,11 @@
 // all resources for the application
 /* global window,Image*/
 // const loadResources = () => '0 resources';
-let resourceCache = {};
-const readyCallbacks = [];
-const isReady = () => {
+
+const isReady = (me) => {
   let ready = true;
-  Object.keys(resourceCache).forEach = (k) => {
-    if ({}.prototype.hasOwnProperty.call(resourceCache, k) && !resourceCache[k]) {
+  Object.keys(me.resourceCache).forEach = (k) => {
+    if ({}.prototype.hasOwnProperty.call(me.resourceCache, k) && !me.resourceCache[k]) {
       ready = false;
     }
   };
@@ -19,45 +18,41 @@ const print = (val) => {
 
 class Resources {
   constructor() {
-    resourceCache = {};
     this.resourceCache = {};
     this.readyCallbacks = [];
   }
   load(url) {
     print('Enterd Resource loaders');
-
-    if (resourceCache[url]) {
-      return resourceCache[url];
+    const me = this;
+    if (me.resourceCache[url]) {
+      return me.resourceCache[url];
     }
-    this.loaded = false;
+    me.loaded = false;
     const img = new Image();
+
     img.onload = function Loading() {
-      resourceCache[url] = img;
-      this.loaded = true;
+      me.resourceCache[url] = img;
+      me.loaded = true;
       print('Image loaded');
-      if (isReady()) {
-        readyCallbacks.forEach((func) => {
-          func();
+      if (isReady(me)) {
+        me.readyCallbacks.forEach((val) => {
+          val.func(val.self);
         });
       }
     };
 
     img.src = url;
-    resourceCache[url] = img;
+    me.resourceCache[url] = false;
     return '';
   }
 
-  get(url, rowId, colId) {
-    this.loaded = false;
-    let img = new Image();
-    img = resourceCache[url];
-    img.id = `${rowId + colId}`;
-    print(img);
-    return img;
+  get(url) {
+    print(this.resourceCache[url]);
+    return this.resourceCache[url];
   }
 
-  onReady(func) {
-    readyCallbacks.push(func);
+  onReady(func, self) {
+    this.readyCallbacks.push({ func, self });
   }
 }
 
