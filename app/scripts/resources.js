@@ -62,5 +62,16 @@ class Resources {
     this.readyCallbacks.push({ func, self });
   }
 }
-
+// A sprite Image calss to make it easy to draw using sprite images
+class SpriteImage {
+  constructor(img, height, width) {
+    this.img = img;
+    this.height = height;
+    this.widht = width;
+  }
+  draw(ctx, pos, width) {
+    ctx.draw(this.img, this.height, this.width, pos, width);
+  }
+}
+window.spriteImage = SpriteImage;
 window.resources = Resources;
