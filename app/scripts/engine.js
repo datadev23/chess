@@ -1,6 +1,7 @@
 /* global window,document,alert,$*/
 /* eslint class-methods-use-this: ["error", { "exceptMethods": ["renderBoard"] }] */
-
+/* eslint no-mixed-operators: ["error",
+  {"groups": [["&", "|", "^", "~", "<<", ">>", ">>>"], ["&&", "||"]]}]*/
 const Utils = window.utils;
 const print = (val) => {
   Utils.log(val);
@@ -16,12 +17,13 @@ const numRows = 8;
 const drawPawns = (white, black, ctx, boardDimension) => {
   const rows = [0, 1, 2, 3, 4, 5, 6, 7];
   const cols = [1, 6];
+  // const updatedDimensions = boardDimension / 2 - 15;
   cols.forEach((col) => {
     rows.forEach((row) => {
-      if (col === 2) {
-        spriteImage.draw(ctx, 'bPawnPos', 10 + row * boardDimension, col * boardDimension + 10);
+      if (col === 1) {
+        spriteImage.draw(ctx, 'bPawn', row * boardDimension + 30, col * boardDimension + 5);
       } else {
-        spriteImage.draw(ctx, 'wPawnPos', row * boardDimension + 10, col * boardDimension + 10);
+        spriteImage.draw(ctx, 'wPawn', row * boardDimension + 30, col * boardDimension + 5);
       }
     });
   });
@@ -53,8 +55,8 @@ class Engine {
     this.lightTile = [390, 5];
     this.allPostions.push({ name: 'darkTile', val: this.darkTile });
     this.allPostions.push({ name: 'lightTile', val: this.lightTile });
-    this.allPostions.push({ name: 'bPawnPos', val: this.bPawnPos });
-    this.allPostions.push({ name: 'wPawnPos', val: this.wPawnPos });
+    this.allPostions.push({ name: 'bPawn', val: this.bPawnPos });
+    this.allPostions.push({ name: 'wPawn', val: this.wPawnPos });
 
     ctx = canvas.getContext('2d');
     resources.loadAll(this.spriteSheet);
