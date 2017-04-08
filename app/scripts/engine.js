@@ -7,11 +7,25 @@ const print = (val) => {
 };
 const Resources = window.Resources;
 const resources = new Resources();
-const columns = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+const SpriteImage = window.SpriteImage;
+let spriteImage;
+// const columns = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
 const numCols = 8;
 const numRows = 8;
-const rows = [1, 2, 3, 4, 5, 6, 7, 8];
-
+// const rows = [1, 2, 3, 4, 5, 6, 7, 8];
+const drawPawns = (white, black, ctx, boardDimension) => {
+  const rows = [0, 1, 2, 3, 4, 5, 6, 7];
+  const cols = [1, 6];
+  cols.forEach((col) => {
+    rows.forEach((row) => {
+      if (col === 2) {
+        spriteImage.draw(ctx, 'bPawnPos', 10 + row * boardDimension, col * boardDimension + 10);
+      } else {
+        spriteImage.draw(ctx, 'wPawnPos', row * boardDimension + 10, col * boardDimension + 10);
+      }
+    });
+  });
+};
 // let currentTile = {};
 // currentTile = { chess: 'val' };
 let ctx = {};
@@ -30,29 +44,24 @@ class Engine {
       Utils.alert('Canvas is not supported');
       return;
     }
-    this.blackTile = 'images/blackTile.jpg';
-    this.whiteTile = 'images/whiteTile.png';
-    this.pawnImageB = {
-      src: 'images/pieces.png',
-      width: '31',
-      height: '66',
-      x: '-31',
-      y: '-19',
-    };
-    this.pawnImageW = {
-      src: 'images/pieces.png',
-      width: '',
-      height: '',
-      x: '-30',
-      y: '-120',
-    };
+    this.allPostions = [];
+    this.boardDimension = 90;
+    this.spriteSheet = 'images/ChessBoardSpriteSheet.png';
+    this.bPawnPos = [36, 210];
+    this.wPawnPos = [35, 311];
+    this.darkTile = [5, 5];
+    this.lightTile = [390, 5];
+    this.allPostions.push({ name: 'darkTile', val: this.darkTile });
+    this.allPostions.push({ name: 'lightTile', val: this.lightTile });
+    this.allPostions.push({ name: 'bPawnPos', val: this.bPawnPos });
+    this.allPostions.push({ name: 'wPawnPos', val: this.wPawnPos });
+
     ctx = canvas.getContext('2d');
-    resources.load(this.blackTile);
-    resources.load(this.whiteTile);
+    resources.loadAll(this.spriteSheet);
     // resources.loadPieces([this.pawnImageB, this.pawnImageW]);
-    resources.onReady(this.renderBoard, this);
-    canvas.width = 600;
-    canvas.height = 600;
+    resources.onReady({ func: this.renderBoard, self: this });
+    canvas.width = 720;
+    canvas.height = 720;
     doc.getElementById('chessBoard').appendChild(canvas);
 
     this.loaded = true;
@@ -60,46 +69,43 @@ class Engine {
   renderBoard(self) {
     let row;
     let col;
-    // ctx.drawImage(resources.get(blackTile), 0 * 60, 0 * 60);
-    // ctx.drawImage(resources.get(whiteTile), 1 * 60, 1 * 60);
+    spriteImage = new SpriteImage(
+      resources.get(self.spriteSheet),
+      self.boardDimension,
+      self.allPostions,
+    );
     for (row = 0; row < numRows; row += 1) {
       for (col = 0; col < numCols; col += 1) {
         if (row % 2 === 0) {
           if (col % 2 === 0) {
-            ctx.drawImage(
-              resources.get(self.blackTile, rows[row], columns[col]),
-              col * 60,
-              row * 60,
-            );
+            spriteImage.draw(ctx, 'darkTile', col * self.boardDimension, row * self.boardDimension);
           } else {
-            ctx.drawImage(
-              resources.get(self.whiteTile, rows[row], columns[col]),
-              col * 60,
-              row * 60,
+            spriteImage.draw(
+              ctx,
+              'lightTile',
+              col * self.boardDimension,
+              row * self.boardDimension,
             );
           }
         } else if (row % 2 !== 0) {
           if (col % 2 === 0) {
-            ctx.drawImage(
-              resources.get(self.whiteTile, rows[row], columns[col]),
-              col * 60,
-              row * 60,
+            spriteImage.draw(
+              ctx,
+              'lightTile',
+              col * self.boardDimension,
+              row * self.boardDimension,
             );
           } else {
-            ctx.drawImage(
-              resources.get(self.blackTile, rows[row], columns[col]),
-              col * 60,
-              row * 60,
-            );
+            spriteImage.draw(ctx, 'darkTile', col * self.boardDimension, row * self.boardDimension);
           }
         }
       }
     }
+    self.drawDefaultPieces(ctx);
   }
-  // generateItems() {
-  //   const self = this;
-  //   self.pawnImage;
-  // }
+  drawDefaultPieces() {
+    drawPawns(this.wPawnPos, this.bPawnPos, ctx, this.boardDimension);
+  }
 }
 
 window.engine = Engine;
