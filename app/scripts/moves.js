@@ -9,7 +9,6 @@ const move = (item = 'none', color = 'white') => {
 };
 
 class Moves {
-  moves;
   constructor(itemVal = 'pawn') {
     this.item = itemVal;
   }
@@ -32,8 +31,8 @@ class Pieces {
     this.inPlay = inPlay;
   }
   move() {
-    this.x = x + 1;
-    this.y = y + 1;
+    this.x += 1;
+    this.y += 1;
   }
   isInPlay() {
     return this.inPlay;
