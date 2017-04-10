@@ -9,6 +9,7 @@ const move = (item = 'none', color = 'white') => {
 };
 
 class Moves {
+  moves;
   constructor(itemVal = 'pawn') {
     this.item = itemVal;
   }
@@ -17,6 +18,25 @@ class Moves {
   }
   move() {
     return `${move(this.item)} made`;
+  }
+}
+/**
+ * A
+ * @type {[type]}
+ */
+class Pieces {
+  constructor(defX, defY, side, inPlay) {
+    this.x = defX;
+    this.y = defY;
+    this.side = side;
+    this.inPlay = inPlay;
+  }
+  move() {
+    this.x = x + 1;
+    this.y = y + 1;
+  }
+  isInPlay() {
+    return this.inPlay;
   }
 }
 
