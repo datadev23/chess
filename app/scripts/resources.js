@@ -80,8 +80,8 @@ class SpriteImage {
     this.height = width;
     this.positions = positions;
   }
-  draw(context, piece, x, y) {
-    const pos = this.positions.find(obj => obj.name === piece).val;
+  draw(context, pos, x, y) {
+    // const pos = this.positions.find(obj => obj.name === piece).val;
     context.drawImage(
       this.img,
       pos[0],
