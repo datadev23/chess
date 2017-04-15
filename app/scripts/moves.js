@@ -30,9 +30,8 @@ class Pieces {
     this.side = side;
     this.inPlay = inPlay;
   }
-  move() {
-    this.x += 1;
-    this.y += 1;
+  render(spriteImage, ctx) {
+    spriteImage.draw(ctx, this.canvasPosition, this.x, this.y);
   }
 
   // get canvasPosition() {
