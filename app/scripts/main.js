@@ -1,4 +1,4 @@
-/* global window*/
+/* global window,document*/
 const Engine = window.engine;
 // const Moves = window.moves;
 const Utils = window.utils;
@@ -19,9 +19,9 @@ const init = () => {
   const engine = new Engine('Main Engine');
   // const moves = new Moves('pawn');
 
-  engine.load();
-
+  window.requestAnimationFrame(engine.load.bind(engine));
   // print(moves.currentMove);
+  //
 };
 
 class Main {
