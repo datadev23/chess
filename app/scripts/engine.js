@@ -25,7 +25,7 @@ const drawPawns = (white, black, ctx, boardDimension, allPieces) => {
   cols.forEach((col) => {
     rows.forEach((row) => {
       side = col === 1 ? 'black' : 'white';
-      pawn = new Pawn(side, row * boardDimension + 30, col * boardDimension + 5, true);
+      pawn = new Pawn(row * boardDimension + 30, col * boardDimension + 5, side, true);
       spriteImage.draw(ctx, pawn.canvasPosition, pawn.x, pawn.y);
       allPieces.push(pawn);
     });

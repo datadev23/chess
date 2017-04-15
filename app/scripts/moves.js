@@ -1,30 +1,12 @@
 // specific moves for all the items
 /* global window*/
 
-// const move = (item = 'none', color = 'white') => {
-//   if (item === 'pawn' && color === 'white') {
-//     return 'First move';
-//   }
-//   return 'Wrong move';
-// };
-//
-// class Moves {
-//   constructor(itemVal = 'pawn') {
-//     this.item = itemVal;
-//   }
-//   get currentMove() {
-//     return this.move();
-//   }
-//   move() {
-//     return `${move(this.item)} made`;
-//   }
-// }
 /**
- * A
- * @type {[type]}
+ * A Base class for all Pieces
+ * @type {String}
  */
 class Pieces {
-  constructor(side = 'white', defX, defY, inPlay) {
+  constructor(defX, defY, side = 'white', inPlay = true) {
     this.x = defX;
     this.y = defY;
     this.side = side;
