@@ -37,7 +37,7 @@ let ctx = {};
 // let blackTile = '';
 class Engine {
   constructor() {
-    document.addEventListener('click', this.boardClick.bind(this));
+    // document.addEventListener('click', this.boardClick.bind(this));
   }
   load() {
     print('Engine load function called');
@@ -61,7 +61,7 @@ class Engine {
     canvas.width = 720;
     canvas.height = 720;
     doc.getElementById('chessBoard').appendChild(canvas);
-
+    canvas.addEventListener('click', this.boardClick.bind(this), false);
     this.loaded = true;
   }
   renderBoard(self) {
