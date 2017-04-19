@@ -133,6 +133,15 @@ class Engine {
       print('Nothing has been CLicked');
       // an empty cell was clicked
     }
+    /*
+    Reference : http://stackoverflow.com/a/18053642/6911206
+      function getCursorPosition(canvas, event) {
+    var rect = canvas.getBoundingClientRect();
+    var x = event.clientX - rect.left;
+    var y = event.clientY - rect.top;
+    console.log("x: " + x + " y: " + y);
+}
+    */
   }
   drawDefaultPieces() {
     drawPawns(this.wPawnPos, this.bPawnPos, ctx, this.boardDimension, this.allPieces);
